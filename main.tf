@@ -17,7 +17,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
     name = "azure-resource"
-    location = "Australia East"
+    location = "eastus2"
 }
 
 #setup Virtual Networks for Azure load balanced VMs
