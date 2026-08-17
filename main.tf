@@ -62,6 +62,16 @@ resource "azurerm_subnet_network_security_group_association" "securetcp_assicait
   
 }
 
+#Create Public IP for Laod Balancing
+resource "azurerm_public_ip" "public_ip" {
+  name = "public-ip"
+  location = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method = "Static"
+  sku = "Standard"
+  
+}
+
 #Create NIC for Azure VMs
 resource "azurerm_network_interface" "nic" {
   count = 2
@@ -70,13 +80,12 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
-    name = "internal"
+    name = "ipaddr${count.index}"
     subnet_id = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
+    primary = true
   }
 }
-
-
 
 #Configure Azure Ubuntu VMs
 resource "azurerm_linux_virtual_machine" "vm" {
