@@ -19,3 +19,10 @@ resource "azurerm_resource_group" "rg" {
     name = "azure-resource"
     location = "Australia East"
 }
+
+#setup Virtual Networks for Azure load balanced VMs
+resource "azurevm_virtual_network" "vnet" {
+  name = "azurevm-vnet"
+  address_space = ["10.0.0.0/16"]
+  location = var.location
+}
