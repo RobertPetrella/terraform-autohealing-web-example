@@ -4,6 +4,10 @@ variable "location" {
     default = "Australia East"
 }
 
+variable "resource_group_name" {
+    description = "Resource Group Name"
+}
+
 variable "vm_admin_username" {
     description = "Admin username for VM"
 }
