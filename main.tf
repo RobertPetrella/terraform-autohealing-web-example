@@ -97,6 +97,15 @@ resource "azurerm_linux_virtual_machine" "vm" {
   allow_extension_operations = true #Allows extensions to run in VM
 }
 
+#Assign the NIC to the backend address pool of the load balancer
+resource "azurerm_network_interface_backend_address_pool_association" "backend_association" {
+  count = 2
+  network_interface_id = azurerm_network_interface.nic[count.index].id
+  ip_configuration_name = "ipconfig${count.index}"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
+  
+}
+
 #Deploy NGINX Onto VMs utilising a bash script to update apt and deploy NGINX
 resource "azurerm_virtual_machine_extension" "deploy_nginx" {
   count = 2
