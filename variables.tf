@@ -10,9 +10,12 @@ variable "resource_group_name" {
 
 variable "vm_admin_username" {
     description = "Admin username for VM"
+    type = string
+	default = "admin"
 }
 
 variable "vm_admin_password" {
     description = "Admin password for VM creation"
     sensitive = true
+    default = "TestPassword1234!"
 }
