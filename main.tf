@@ -116,8 +116,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
 #Deploy NGINX Onto VMs utilising a bash script to update apt and deploy NGINX
 resource "azurerm_virtual_machine_extension" "deploy_nginx" {
+  count = 2
   name = "deploy-nginx"
-  virtual_machine_id = azurerm_linux_virtual_machine.vm.id
+  virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
   publisher = "Microsoft.Azure.Extensions"
   type = "CustomScript"
   type_handler_version = "2.1"
