@@ -19,3 +19,9 @@ variable "vm_admin_password" {
     sensitive = true
     default = "TestPassword1234!"
 }
+
+variable "public_ip_name" {
+	description = "name of load balancer"
+	type = string
+	default = "public-ip"
+}
