@@ -1,7 +1,7 @@
 #Terraform variables
 variable "location" {
     description = "Azure Region location"
-    default = "Australia East"
+    default = "eastus2"
 }
 
 variable "resource_group_name" {
