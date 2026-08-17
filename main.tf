@@ -72,4 +72,20 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku = "22_04-lts"
     version = "latest"
   }
+  provision_vm_agent = true
+  allow_extension_operations = true #Allows extensions to run in VM
+}
+
+#Deploy NGINX Onto VMs utilising a bash script to update apt and deploy NGINX
+resource "azurerm_virtual_machine_extension" "deploy_nginx" {
+  name = "deploy-nginx"
+  virtual_machine_id = azurerm_linux_virtual_machine.vm.id
+  publisher = "Microsoft.Azure.Extensions"
+  type = "CustomScript"
+  type_handler_version = "2.1"
+  settings = <<SETTINGS
+  {
+    "commandToExecute": "sudo apt update && sudo apt install -y nginx && sudo systemctl enable nginx && sudo systemctl start nginx"
+  }
+  SETTINGS
 }
