@@ -65,7 +65,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_os_disk {
     name = "mainosdisk1"
-    caching = ="ReadWrite"
+    caching = "ReadWrite"
     create_option = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
