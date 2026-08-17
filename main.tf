@@ -96,11 +96,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
   network_interface_ids = [azurerm_network_interface.nic[count.index].id]
   size = "Standard_B1s"
 
-  admin_ssh_key {
-    username = "admin"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
-
   os_disk {
     caching = "ReadWrite"
     storage_account_type = "Standard_LRS"
