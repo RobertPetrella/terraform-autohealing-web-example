@@ -154,3 +154,29 @@ resource "azurerm_lb_probe" "health_probe" {
   port = 80
   
 }
+
+#Create Load balancing rules
+#This forwards the frontend traffic to the backend pool created above
+resource "azurerm_lb_rule" "lb_rule" {
+  loadbalancer_id = azurerm_lb.web_load_balancer.id
+  name = "loadbalancing-rule"
+  protocol = "Tcp"
+  frontend_port = 80
+  backend_port = 80
+  disable_outbound_snat = true #Disables soure NAT for outbound traffic
+  frontend_ip_configuration_name = azurerm_lb.web_load_balancer.frontend_ip_configuration.name
+  probe_id = azurerm_lb_probe.health_probe.id
+  backend_address_pool_ids = [azurerm_lb_backend_address_pool.backend_pool.id]
+}
+
+#Create outbound load balancing rule
+resource "azurerm_lb_outbound_rule" "lb_outbound_rule" {
+  name = "outbound-lb-rule"
+  loadbalancer_id = azurerm_lb.web_load_balancer.id
+  protocol = "Tcp"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
+
+  frontend_ip_configuration {
+    name = azurerm_lb.web_load_balancer.frontend_ip_configuration.name
+  }
+}
