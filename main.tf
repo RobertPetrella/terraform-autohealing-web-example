@@ -137,7 +137,7 @@ resource "azurerm_lb" "web_load_balancer" {
   sku = "Standard"
 
   frontend_ip_configuration {
-    name = "lb_frontend_ip"
+    name = var.public_ip_name
     public_ip_address_id = azurerm_public_ip.public_ip.id
   }
 }
@@ -164,7 +164,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   frontend_port = 80
   backend_port = 80
   disable_outbound_snat = true #Disables soure NAT for outbound traffic
-  frontend_ip_configuration_name = azurerm_lb.web_load_balancer.frontend_ip_configuration.name
+  frontend_ip_configuration_name =  var.public_ip_name
   probe_id = azurerm_lb_probe.health_probe.id
   backend_address_pool_ids = [azurerm_lb_backend_address_pool.backend_pool.id]
 }
@@ -177,6 +177,6 @@ resource "azurerm_lb_outbound_rule" "lb_outbound_rule" {
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 
   frontend_ip_configuration {
-    name = azurerm_lb.web_load_balancer.frontend_ip_configuration.name
+    name =  var.public_ip_name
   }
 }
