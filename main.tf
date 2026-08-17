@@ -49,36 +49,27 @@ resource "azurerm_network_interface" "nic" {
 }
 
 #Configure Azure Ubuntu VMs
-resource "azurerm_virtual_machine" "vm" {
-  name = "$azurevm-vm"
+resource "azurerm_linux_virtual_machine" "vm" {
+  name = "azurevm-vm"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.nic.id]
-  vm_size = "Standard_DS1_v2"
+  network_interface_ids = [azurerm_network_interface.nic.id,]
+  size = "Standard_DS1_v2"
 
-  storage_image_reference {
+  admin_ssh_key {
+    username = "admin"
+    public_key = file("~/.ssh/id_rsa.pub")
+  }
+
+  os_disk {
+    caching = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
     publisher = "Canonical"
     offer = "0001-com-ubuntu-server-jammy"
-    sku = "22-04-lts"
+    sku = "22_04-lts"
     version = "latest"
-  }
-
-  storage_os_disk {
-    name = "mainosdisk1"
-    caching = "ReadWrite"
-    create_option = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-
-  os_profile {
-    computer_name = "examplewebserver"
-    admin_username = "fakeadmin"
-    admin_password = "FakePassword1234!"
-  }
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
-  tags = {
-    environment = "staging"
   }
 }
