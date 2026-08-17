@@ -1,5 +1,5 @@
 # terraform-autohealing-web-example
-The purpose of this Github project is for prracticing and earning how to utilise Terraform with Azure DevOps. The goal of this project is to create a load balanced VM deployment of a minimum of two Linux NGINX web servers with N+1 explandability, and to deploy a load balancer with health probing to ensure constant uptime.
+The purpose of this Github project is for prracticing and earning how to utilise Terraform with Azure DevOps. The goal of this project is to create a load balanced VM deployment of a minimum of two Linux NGINX web servers with N+1 expandability, and to deploy a load balancer with health probing to ensure constant uptime.
 
 This project is simply a concept and is used to primarily for myself to learn and understand the concept of Infrastructure as Code and how to do a simple writeup of IaC architecture to further improve my skillsets.
 
