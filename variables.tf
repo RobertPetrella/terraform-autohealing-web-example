@@ -1,7 +1,7 @@
 #Terraform variables
 variable "location" {
     description = "Azure Region location"
-    location = "Australia East"
+    default = "Australia East"
 }
 
 variable "vm_admin_username" {
