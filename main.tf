@@ -48,6 +48,32 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+#Create Network security groups for secure TCP connections
+resource "azurerm_network_security_group" "securetcp" {
+  name                = "secure-network-group"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "web"
+    priority                   = 1008
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "10.0.1.0/24"
+  }
+}
+
+#Associate the security group to the VMs subnet
+resource "azurerm_subnet_network_security_group_association" "securetcp_assicaition" {
+  subnet_id = azurerm_subnet.subnet.id
+  network_security_group_id = azurerm_network_security_group.securetcp.id
+  
+}
+
 #Configure Azure Ubuntu VMs
 resource "azurerm_linux_virtual_machine" "vm" {
   name = "azurevm-vm"
