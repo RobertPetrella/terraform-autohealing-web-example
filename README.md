@@ -3,6 +3,11 @@ The purpose of this Github project is for prracticing and earning how to utilise
 
 This project is simply a concept and is used to primarily for myself to learn and understand the concept of Infrastructure as Code and how to do a simple writeup of IaC architecture to further improve my skillsets.
 
+To run the project, please clone it to a working directory:
+```
+git clone https://github.com/RobertPetrella/terraform-autohealing-web-example.git
+```
+
 ## Build and Execute Terraform Plan
 
 ### 1. Initialise Terraform
