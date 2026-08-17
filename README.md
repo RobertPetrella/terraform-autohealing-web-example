@@ -30,7 +30,7 @@ If not outfile is specified, use the following command instead:
 ```
 terraform apply
 ```
-### 4. Test IF Applied Plan has Deployed
+### 4. Test If Applied Plan has Deployed
 As speciifed in the outputs.tf file in the repository, two parameters can be checked once applying the Terraform Plan.
 View the Public IP:
 ```
