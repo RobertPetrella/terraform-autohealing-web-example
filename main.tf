@@ -36,20 +36,6 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes =  ["10.0.1.0/24"]
 }
 
-#Create NIC for Azure VMs
-resource "azurerm_network_interface" "nic" {
-  count = 2
-  name = "azurevm-nic-${count.index}"
-  location = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  ip_configuration {
-    name = "internal"
-    subnet_id = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
 #Create Network security groups for secure TCP connections
 resource "azurerm_network_security_group" "securetcp" {
   name                = "secure-network-group"
@@ -75,6 +61,22 @@ resource "azurerm_subnet_network_security_group_association" "securetcp_assicait
   network_security_group_id = azurerm_network_security_group.securetcp.id
   
 }
+
+#Create NIC for Azure VMs
+resource "azurerm_network_interface" "nic" {
+  count = 2
+  name = "azurevm-nic-${count.index}"
+  location = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name = "internal"
+    subnet_id = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+
 
 #Configure Azure Ubuntu VMs
 resource "azurerm_linux_virtual_machine" "vm" {
