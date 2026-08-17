@@ -6,6 +6,7 @@ variable "location" {
 
 variable "resource_group_name" {
     description = "Resource Group Name"
+    default = "azure-resource"
 }
 
 variable "vm_admin_username" {
