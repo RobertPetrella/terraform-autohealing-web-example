@@ -1,7 +1,7 @@
 # terraform-autohealing-web-example
-The purpose of this Github project is for prracticing and earning how to utilise Terraform with Azure DevOps. The goal of this project is to create a load balanced VM deployment of a minimum of two Linux NGINX web servers with N+1 expandability, and to deploy a load balancer with health probing to ensure constant uptime.
+The purpose of this Github project is for practising and earning how to utilise Terraform with Azure DevOps. The goal of this project is to create a load balanced VM deployment of a minimum of two Linux NGINX web servers with N+1 expandability, and to deploy a load balancer with health probing to ensure constant uptime.
 
-This project is simply a concept and is used to primarily for myself to learn and understand the concept of Infrastructure as Code and how to do a simple writeup of IaC architecture to further improve my skillsets.
+This project is simply a concept and is used to primarily for myself to learn and understand the concept of Infrastructure as Code and how to do a simple write-up of IaC architecture to further improve my skill sets.
 
 To run the project, please clone it to a working directory:
 ```
@@ -30,8 +30,8 @@ If not outfile is specified, use the following command instead:
 ```
 terraform apply
 ```
-### 4. Test If Applied Plan has Deployed
-As speciifed in the outputs.tf file in the repository, two parameters can be checked once applying the Terraform Plan.
+### 4. Test if Applied Plan has Deployed
+As specified in the outputs.tf file in the repository, two parameters can be checked once applying the Terraform Plan.
 View the Public IP:
 ```
 terraform output -raw public_ip_address
@@ -40,8 +40,8 @@ View Resource group name:
 ```
 terraform output -raw resource_group_name
 ```
-### 5. Cleanup Terraform Resources
-The following commands will destroy the deployed VMs and free up all resoueces. First, run terraform plan to setup a destroy plan:
+### 5. Clean-up Terraform Resources
+The following commands will destroy the deployed VMs and free up all resources. First, run terraform plan to setup a destroy plan:
 ```
 terraform plan -destroy -out main.destroy.tfplan
 ```
