@@ -51,7 +51,7 @@ terraform apply main.destroy.tfplan
 ```
 
 ## Chosen Provider: Azure
-Azure was chosen as the provider due to my familiarity of Azure.
+Azure was chosen as the provider due to my familiarity of Azure, as well as their significant infrastructure which allows for lower costs and ease of scalability.
 
 ## Assumptions
 THe Web Servers for this project are designed to be ultra lightweight websites (the basic NGINX page). Several assumptions were made when calculating the requirements and to fit within a monthly running budget of <= $20AUD/month
